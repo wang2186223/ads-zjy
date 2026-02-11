@@ -148,10 +148,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2026-02-04T17:06:06.264047">
-    <meta property="article:modified_time" content="2026-02-04T17:06:06.264047">
-    <meta name="date" content="2026-02-04">
-    <meta name="last-modified" content="2026-02-04 17:06:06">
+    <meta property="article:published_time" content="2026-02-11T12:33:32.471099">
+    <meta property="article:modified_time" content="2026-02-11T12:33:32.471099">
+    <meta name="date" content="2026-02-11">
+    <meta name="last-modified" content="2026-02-11 12:33:32">
     
     
     <!-- Open Graph Meta Tags -->
@@ -196,11 +196,11 @@
 
     fbq('init', '9481513911889537');
     
-    // Natural 72-hour event tracking prevention (resets every 3 days)
+    // Natural 24-hour event tracking prevention (resets every day)
     function shouldTrackEvent(eventName) {
         const now = new Date();
-        const threeDaysAgo = new Date(now.getTime() - (3 * 24 * 60 * 60 * 1000));
-        const currentPeriod = Math.floor(now.getTime() / (3 * 24 * 60 * 60 * 1000));
+        const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+        const currentPeriod = Math.floor(now.getTime() / (24 * 60 * 60 * 1000));
         const storageKey = `fb_event_${eventName}`;
         const lastTrackedPeriod = localStorage.getItem(storageKey);
         
@@ -212,66 +212,443 @@
         return false;
     }
     
-    // Track PageView with 72-hour prevention
+    // Track PageView with 24-hour prevention
     if (shouldTrackEvent('PageView')) {
         fbq('track', 'PageView');
-        console.log('Facebook事件已发送: PageView (页面浏览)');
+        console.log('Facebook event sent: PageView');
     } else {
-        console.log('Facebook事件已跳过: PageView (本72小时内已发送)');
+        console.log('Facebook event skipped: PageView (already sent within 24 hours)');
     }
     
-    // Reading time tracking for Facebook Pixel
-    let readingStartTime = Date.now();
-    let oneMinuteSent = false;
-    let tenMinutesSent = false;
+    // Reading time tracking for Facebook Pixel (跨页面累计 + 仅计算可见时间)
+    const READING_TIME_STORAGE_KEY = 'fb_accumulated_reading_time';
+    const READING_TIME_DATE_KEY = 'fb_reading_time_date';
+    const EVENT_SENT_KEY = 'fb_events_sent'; // 存储已发送的事件
     
+    let visibleStartTime = null;
+    let accumulatedTime = 0; // 当前累计时间（秒）
+    let eventsSent = {}; // 已发送的事件标记
+    
+    // 获取今天的日期字符串
+    function getTodayDateString() {
+        return new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
+    }
+    
+    // 加载累计阅读时间（跨页面）
+    function loadAccumulatedTime() {
+        try {
+            const today = getTodayDateString();
+            const storedDate = localStorage.getItem(READING_TIME_DATE_KEY);
+            
+            // 如果日期不是今天，重置时间
+            if (storedDate !== today) {
+                localStorage.setItem(READING_TIME_DATE_KEY, today);
+                localStorage.removeItem(READING_TIME_STORAGE_KEY);
+                localStorage.removeItem(EVENT_SENT_KEY);
+                return 0;
+            }
+            
+            const stored = localStorage.getItem(READING_TIME_STORAGE_KEY);
+            return stored ? parseFloat(stored) : 0;
+        } catch (e) {
+            console.error('Failed to load accumulated time:', e);
+            return 0;
+        }
+    }
+    
+    // 加载已发送事件标记
+    function loadEventsSent() {
+        try {
+            const today = getTodayDateString();
+            const storedDate = localStorage.getItem(READING_TIME_DATE_KEY);
+            
+            // 如果日期不是今天，重置事件标记
+            if (storedDate !== today) {
+                return {};
+            }
+            
+            const stored = localStorage.getItem(EVENT_SENT_KEY);
+            return stored ? JSON.parse(stored) : {};
+        } catch (e) {
+            console.error('Failed to load events sent:', e);
+            return {};
+        }
+    }
+    
+    // 保存已发送事件标记
+    function saveEventsSent() {
+        try {
+            localStorage.setItem(EVENT_SENT_KEY, JSON.stringify(eventsSent));
+        } catch (e) {
+            console.error('Failed to save events sent:', e);
+        }
+    }
+    
+    // 保存累计阅读时间
+    function saveAccumulatedTime(seconds) {
+        try {
+            localStorage.setItem(READING_TIME_STORAGE_KEY, seconds.toString());
+            localStorage.setItem(READING_TIME_DATE_KEY, getTodayDateString());
+        } catch (e) {
+            console.error('Failed to save accumulated time:', e);
+        }
+    }
+    
+    // 开始可见时间计时
+    function startVisibleTimer() {
+        if (!document.hidden && visibleStartTime === null) {
+            visibleStartTime = Date.now();
+        }
+    }
+    
+    // 停止可见时间计时并累加
+    function stopVisibleTimer() {
+        if (visibleStartTime !== null) {
+            const elapsed = (Date.now() - visibleStartTime) / 1000; // 转换为秒
+            accumulatedTime += elapsed;
+            saveAccumulatedTime(accumulatedTime);
+            visibleStartTime = null;
+        }
+    }
+    
+    // 检查阅读时间并发送事件
     function checkReadingTime() {
-        const currentTime = Date.now();
-        const readingTime = (currentTime - readingStartTime) / 1000 / 60; // in minutes
+        // 先停止计时并保存当前进度
+        stopVisibleTimer();
         
-        if (!oneMinuteSent && readingTime >= 1) {
+        // 计算总时间（分钟）
+        const currentTotalTime = accumulatedTime;
+        const readingMinutes = currentTotalTime / 60;
+        
+        // 检查1分钟事件 - ViewContent 标准事件
+        if (!eventsSent['1m'] && readingMinutes >= 1) {
+            if (shouldTrackEvent('ViewContent_1min')) {
+                fbq('track', 'ViewContent', {
+                    content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
+                    content_type: 'article',
+                    content_category: 'reading_milestone',
+                    value: 0.01,
+                    currency: 'USD'
+                });
+                console.log(`Facebook event sent: ViewContent (1min milestone, accumulated ${readingMinutes.toFixed(2)} minutes)`);
+                eventsSent['1m'] = true;
+                saveEventsSent();
+            } else {
+                console.log('Facebook event skipped: ViewContent_1min (already sent within 24 hours)');
+            }
+        }
+        
+        // 检查1分钟事件 - ReadOneMinute 自定义事件（保留）
+        if (!eventsSent['read1m'] && readingMinutes >= 1) {
             if (shouldTrackEvent('ReadOneMinute')) {
                 fbq('trackCustom', 'ReadOneMinute', {
                     content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
                     content_category: 'Novel',
                     reading_time: 1
                 });
-                console.log('Facebook事件已发送: ReadOneMinute (用户阅读1分钟)');
+                console.log('Facebook event sent: ReadOneMinute (用户阅读1分钟)');
+                eventsSent['read1m'] = true;
+                saveEventsSent();
             } else {
-                console.log('Facebook事件已跳过: ReadOneMinute (本72小时内已发送)');
+                console.log('Facebook event skipped: ReadOneMinute (already sent within 24 hours)');
             }
-            oneMinuteSent = true;
         }
         
-        if (!tenMinutesSent && readingTime >= 10) {
+        // 检查3分钟事件 - ViewContent 标准事件
+        if (!eventsSent['3m'] && readingMinutes >= 3) {
+            if (shouldTrackEvent('ViewContent_3min')) {
+                fbq('track', 'ViewContent', {
+                    content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
+                    content_type: 'article',
+                    content_category: 'reading_engagement',
+                    value: 0.03,
+                    currency: 'USD'
+                });
+                console.log(`Facebook event sent: ViewContent (3min engagement, accumulated ${readingMinutes.toFixed(2)} minutes)`);
+                eventsSent['3m'] = true;
+                saveEventsSent();
+            } else {
+                console.log('Facebook event skipped: ViewContent_3min (already sent within 24 hours)');
+            }
+        }
+        
+        // 检查10分钟事件 - ViewContent 标准事件
+        if (!eventsSent['10m'] && readingMinutes >= 10) {
+            if (shouldTrackEvent('ViewContent_10min')) {
+                fbq('track', 'ViewContent', {
+                    content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
+                    content_type: 'article',
+                    content_category: 'reading_completion',
+                    value: 0.10,
+                    currency: 'USD'
+                });
+                console.log(`Facebook event sent: ViewContent (10min completion, accumulated ${readingMinutes.toFixed(2)} minutes)`);
+                eventsSent['10m'] = true;
+                saveEventsSent();
+            } else {
+                console.log('Facebook event skipped: ViewContent_10min (already sent within 24 hours)');
+            }
+        }
+        
+        // 检查10分钟事件 - ReadTenMinutes 自定义事件（保留）
+        if (!eventsSent['read10m'] && readingMinutes >= 10) {
             if (shouldTrackEvent('ReadTenMinutes')) {
                 fbq('trackCustom', 'ReadTenMinutes', {
                     content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
                     content_category: 'Novel',
                     reading_time: 10
                 });
-                console.log('Facebook事件已发送: ReadTenMinutes (用户阅读10分钟)');
+                console.log('Facebook event sent: ReadTenMinutes (用户阅读10分钟)');
+                eventsSent['read10m'] = true;
+                saveEventsSent();
             } else {
-                console.log('Facebook事件已跳过: ReadTenMinutes (本72小时内已发送)');
+                console.log('Facebook event skipped: ReadTenMinutes (already sent within 24 hours)');
             }
-            tenMinutesSent = true;
         }
+        
+        // 继续计时（如果页面可见）
+        startVisibleTimer();
     }
     
-    // Check reading time every 30 seconds
+    // 初始化：加载之前的累计时间和事件标记
+    accumulatedTime = loadAccumulatedTime();
+    eventsSent = loadEventsSent();
+    console.log(`Accumulated reading time loaded: ${accumulatedTime.toFixed(1)}s (${(accumulatedTime/60).toFixed(2)} minutes)`);
+    console.log(`Events sent status:`, eventsSent);
+    
+    // 页面加载后立即开始计时（如果页面可见）
+    startVisibleTimer();
+    
+    // 立即检查一次（可能已经累计超过阈值）
+    checkReadingTime();
+    
+    // 定期检查阅读时间（每30秒）
     setInterval(checkReadingTime, 30000);
     
-    // Also check when page becomes visible again (in case user switches tabs)
+    // 监听页面可见性变化
     document.addEventListener('visibilitychange', function() {
-        if (!document.hidden) {
+        if (document.hidden) {
+            // 页面隐藏时停止计时
+            stopVisibleTimer();
+        } else {
+            // 页面可见时恢复计时
+            startVisibleTimer();
+            // 立即检查一次（可能刚好达到里程碑）
             checkReadingTime();
         }
+    });
+    
+    // 页面卸载前保存累计时间
+    window.addEventListener('beforeunload', function() {
+        stopVisibleTimer();
     });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=9481513911889537&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
+    
+    <!-- Facebook Pixel - Next Button Click Tracking -->
+    <script>
+    (function() {
+        'use strict';
+        
+        const CLICK_COUNT_KEY = 'fb_next_click_count';
+        const CLICK_DATE_KEY = 'fb_next_click_date';
+        const CLICK_EVENTS_SENT_KEY = 'fb_click_events_sent';
+        
+        // 点击里程碑配置
+        const CLICK_MILESTONES = [
+            { count: 1, event: 'read_c_1', value: 0.01 },
+            { count: 3, event: 'read_c_3', value: 0.03 },
+            { count: 5, event: 'read_c_5', value: 0.05 },
+            { count: 10, event: 'read_c_10', value: 0.10 },
+            { count: 30, event: 'read_c_30', value: 0.15 },
+            { count: 50, event: 'read_c_50', value: 0.20 }
+        ];
+        
+        /**
+         * 获取今天的日期字符串
+         */
+        function getTodayDateString() {
+            return new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
+        }
+        
+        /**
+         * 加载今日点击次数
+         */
+        function loadClickCount() {
+            try {
+                const today = getTodayDateString();
+                const storedDate = localStorage.getItem(CLICK_DATE_KEY);
+                
+                // 如果日期不是今天，重置计数
+                if (storedDate !== today) {
+                    localStorage.setItem(CLICK_DATE_KEY, today);
+                    localStorage.removeItem(CLICK_COUNT_KEY);
+                    localStorage.removeItem(CLICK_EVENTS_SENT_KEY);
+                    return 0;
+                }
+                
+                const stored = localStorage.getItem(CLICK_COUNT_KEY);
+                return stored ? parseInt(stored) : 0;
+            } catch (e) {
+                console.error('Failed to load click count:', e);
+                return 0;
+            }
+        }
+        
+        /**
+         * 保存点击次数
+         */
+        function saveClickCount(count) {
+            try {
+                localStorage.setItem(CLICK_COUNT_KEY, count.toString());
+                localStorage.setItem(CLICK_DATE_KEY, getTodayDateString());
+            } catch (e) {
+                console.error('Failed to save click count:', e);
+            }
+        }
+        
+        /**
+         * 加载已发送的事件标记
+         */
+        function loadClickEventsSent() {
+            try {
+                const today = getTodayDateString();
+                const storedDate = localStorage.getItem(CLICK_DATE_KEY);
+                
+                // 如果日期不是今天，重置事件标记
+                if (storedDate !== today) {
+                    return {};
+                }
+                
+                const stored = localStorage.getItem(CLICK_EVENTS_SENT_KEY);
+                return stored ? JSON.parse(stored) : {};
+            } catch (e) {
+                console.error('Failed to load click events sent:', e);
+                return {};
+            }
+        }
+        
+        /**
+         * 保存已发送的事件标记
+         */
+        function saveClickEventsSent(eventsSent) {
+            try {
+                localStorage.setItem(CLICK_EVENTS_SENT_KEY, JSON.stringify(eventsSent));
+            } catch (e) {
+                console.error('Failed to save click events sent:', e);
+            }
+        }
+        
+        /**
+         * 检查是否应该追踪某个事件（24小时去重）
+         */
+        function shouldTrackClickEvent(eventName) {
+            try {
+                const now = new Date();
+                const currentPeriod = Math.floor(now.getTime() / (24 * 60 * 60 * 1000));
+                const storageKey = `fb_event_${eventName}`;
+                const lastTrackedPeriod = localStorage.getItem(storageKey);
+                
+                if (!lastTrackedPeriod || parseInt(lastTrackedPeriod) !== currentPeriod) {
+                    localStorage.setItem(storageKey, currentPeriod.toString());
+                    return true;
+                }
+                
+                return false;
+            } catch (e) {
+                console.error('Failed to check event tracking:', e);
+                return true; // 出错时允许发送
+            }
+        }
+        
+        /**
+         * 检查并触发点击里程碑事件
+         */
+        function checkAndTriggerMilestones(clickCount) {
+            const eventsSent = loadClickEventsSent();
+            
+            CLICK_MILESTONES.forEach(milestone => {
+                // 如果达到里程碑且尚未发送该事件
+                if (clickCount >= milestone.count && !eventsSent[milestone.event]) {
+                    // 24小时去重检查
+                    if (shouldTrackClickEvent(milestone.event)) {
+                        // 确保 fbq 函数已加载
+                        if (typeof fbq !== 'undefined') {
+                            fbq('trackCustom', milestone.event, {
+                                content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
+                                content_type: 'chapter',
+                                content_category: 'chapter_navigation',
+                                value: milestone.value,
+                                currency: 'USD',
+                                click_count: clickCount
+                            });
+                            
+                            console.log(`✅ Facebook event sent: ${milestone.event} (${clickCount} clicks, value: $${milestone.value})`);
+                        } else {
+                            console.warn(`⚠️ fbq not loaded, skipping ${milestone.event}`);
+                        }
+                        
+                        // 标记该事件已发送
+                        eventsSent[milestone.event] = true;
+                        saveClickEventsSent(eventsSent);
+                    } else {
+                        console.log(`⏭️ Facebook event skipped: ${milestone.event} (already sent within 24 hours)`);
+                    }
+                }
+            });
+        }
+        
+        /**
+         * 初始化 Next 按钮点击追踪
+         */
+        function initNextButtonTracking() {
+            // 等待 DOM 加载完成
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupClickTracking);
+            } else {
+                setupClickTracking();
+            }
+        }
+        
+        /**
+         * 设置点击追踪
+         */
+        function setupClickTracking() {
+            const nextBtn = document.getElementById('next-chapter');
+            
+            if (!nextBtn) {
+                console.log('Next button not found, click tracking disabled');
+                return;
+            }
+            
+            // 加载当前点击次数
+            let clickCount = loadClickCount();
+            console.log(`Next button click count loaded: ${clickCount} clicks today`);
+            
+            // 页面加载时检查一次（可能之前已经达到里程碑）
+            checkAndTriggerMilestones(clickCount);
+            
+            // 监听 Next 按钮点击
+            nextBtn.addEventListener('click', function(e) {
+                // 增加点击次数
+                clickCount++;
+                saveClickCount(clickCount);
+                
+                console.log(`Next button clicked: ${clickCount} times today`);
+                
+                // 检查并触发相应的里程碑事件
+                checkAndTriggerMilestones(clickCount);
+            });
+        }
+        
+        // 初始化
+        initNextButtonTracking();
+    })();
+    </script>
+    <!-- End Facebook Pixel - Next Button Click Tracking -->
     
     <!-- Page visit statistics code -->
     <script>
@@ -426,7 +803,7 @@
     <style>
         :root {
             --primary-color: #007AFF;
-            --bg-color: #FFFFFF;
+            --bg-color: #FDFBF7;
             --text-color: #333333;
             --secondary-bg: #F2F2F7;
             --border-color: #E5E5EA;
@@ -740,8 +1117,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2026-02-04T17:06:06.264047",
-        "dateModified": "2026-02-04T17:06:06.264047",
+        "datePublished": "2026-02-11T12:33:32.471099",
+        "dateModified": "2026-02-11T12:33:32.471099",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -3819,31 +4196,6 @@
             }
         }
 
-        // Facebook Pixel: Track first Next button click
-        let nextClickTracked = false;
-        const nextChapterBtn = document.getElementById('next-chapter');
-        
-        if (nextChapterBtn && !nextChapterBtn.disabled) {
-            nextChapterBtn.addEventListener('click', function(e) {
-                // Track first click event
-                if (!nextClickTracked) {
-                    if (typeof shouldTrackEvent !== 'undefined' && shouldTrackEvent('FirstNextClick')) {
-                        if (typeof fbq !== 'undefined') {
-                            fbq('trackCustom', 'FirstNextClick', {
-                                content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
-                                content_category: 'Novel',
-                                chapter_number: 593
-                            });
-                            console.log('Facebook事件已发送: FirstNextClick (首次点击下一章)');
-                        }
-                    } else {
-                        console.log('Facebook事件已跳过: FirstNextClick (本72小时内已发送)');
-                    }
-                    nextClickTracked = true;
-                }
-            });
-        }
-
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') {
@@ -3854,21 +4206,6 @@
             } else if (e.key === 'ArrowRight') {
                 const nextBtn = document.getElementById('next-chapter');
                 if (nextBtn && !nextBtn.disabled) {
-                    // Track first next click via keyboard
-                    if (!nextClickTracked) {
-                        if (typeof shouldTrackEvent !== 'undefined' && shouldTrackEvent('FirstNextClick')) {
-                            if (typeof fbq !== 'undefined') {
-                                fbq('trackCustom', 'FirstNextClick', {
-                                    content_name: 'I just found out I’m pregnant and my husband’s checking into a hotel with his ex',
-                                    content_category: 'Novel',
-                                    chapter_number: 593,
-                                    click_type: 'keyboard'
-                                });
-                                console.log('Facebook事件已发送: FirstNextClick (首次点击下一章-键盘)');
-                            }
-                        }
-                        nextClickTracked = true;
-                    }
                     window.location.href = addTrackingParams(nextBtn.href);
                 }
             } else if (e.key === 'Escape') {
