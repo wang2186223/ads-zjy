@@ -14,16 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- AB Version Detection & Redirect System -->
-    <script>
-    (function() {
-        'use strict';
-        
-        // List of tracking parameters that indicate user came from ads
-        const TRACKING_PARAMS = ['fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id'];
-        const STORAGE_KEY = 'has_tracking_params';
-        const STORAGE_EXPIRY_KEY = 'tracking_params_expiry';
-        const EXPIRY_HOURS = 720; // 30 days expiration (30 * 24)
+    <!-- AB Version Detection & Redirect System (已禁用) -->
         
         /**
          * Check if URL has any tracking parameters
@@ -128,10 +119,7 @@
             // Otherwise, user has stored tracking params, show ad version
         }
         
-        // Execute detection immediately (before page loads)
-        // initVersionDetection();  // 已禁用：所有用户都显示广告版本，不跳转clean版本
-    })();
-    </script>
+
     
     <!-- Disable Console Output -->
     <script>
@@ -158,10 +146,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2026-04-10T13:49:02.973040">
-    <meta property="article:modified_time" content="2026-04-10T13:49:02.973040">
-    <meta name="date" content="2026-04-10">
-    <meta name="last-modified" content="2026-04-10 13:49:02">
+    <meta property="article:published_time" content="2026-05-29T11:13:14.170373">
+    <meta property="article:modified_time" content="2026-05-29T11:13:14.170373">
+    <meta name="date" content="2026-05-29">
+    <meta name="last-modified" content="2026-05-29 11:13:14">
     
     
     <!-- Open Graph Meta Tags -->
@@ -1011,73 +999,6 @@
             gap: 15px;
         }
 
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background-color: var(--bg-color);
-            border-right: 1px solid var(--border-color);
-            z-index: 200;
-            overflow-y: auto;
-            padding: 20px;
-            transition: left 0.3s ease;
-        }
-
-        .sidebar.open {
-            left: 0;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 199;
-            display: none;
-        }
-
-        .sidebar-overlay.open {
-            display: block;
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .sidebar-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .chapter-list {
-            list-style: none;
-        }
-
-        .chapter-item {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .chapter-item a {
-            color: var(--text-color);
-            text-decoration: none;
-            display: block;
-        }
-
-        .chapter-item.active a {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
         .font-small {
             font-size: 16px;
         }
@@ -1108,10 +1029,6 @@
                 font-size: 14px;
             }
             
-            .sidebar {
-                width: 85%;
-                left: -85%;
-            }
         }
     </style>
     
@@ -1127,8 +1044,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2026-04-10T13:49:02.973040",
-        "dateModified": "2026-04-10T13:49:02.973040",
+        "datePublished": "2026-05-29T11:13:14.170373",
+        "dateModified": "2026-05-29T11:13:14.170373",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -1177,9 +1094,9 @@
                     <button class="btn" id="theme-btn">
                         <div class="theme-toggle"></div>
                     </button>
-                    <button class="btn" id="toc-btn">
+                    <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/" class="btn" id="toc-btn" title="Back to Book Details">
                         <i class="fas fa-bars"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1191,11 +1108,11 @@
             <div class="content font-medium">
                 
                 
+                
+                
                 <p>Annie&#39;s POV</p>
                 
-                <!-- AdSense In-Article Ad after first paragraph -->
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1283551042417067"
-                     crossorigin="anonymous"></script>
+                <!-- AdSense In-Article Ad (after paragraph 1) -->
                 <ins class="adsbygoogle"
                      style="display:block; text-align:center;"
                      data-ad-layout="in-article"
@@ -1209,7 +1126,9 @@
                 
                 
                 
+                
                 <p>Philip&#39;s retreating figure had barely disappeared when Howard&#39;s phone rang. I was still tingling from his touch, the warmth of his fingers intertwined with mine sending electricity through my entire body. The way he&#39;d claimed me as his girlfriend made my heart race - not just his words, but the possessive edge in his voice that hinted at desires barely contained beneath his controlled exterior.</p>
+                
                 
                 
                 
@@ -1219,12 +1138,26 @@
                 
                 
                 
+                
                 <p>&#34;Go,&#34; I said quickly, though every nerve in my body screamed to stay near him.&#34;I&#39;ll catch a cab home.&#34;</p>
                 
                 
                 
                 
+                
                 <p>&#34;Wait.&#34; He caught my hand, his thumb tracing slow circles on my palm that made my skin burn. The simple touch somehow felt more intimate than our passionate encounter days ago. &#34;The company library has an excellent collection, and there&#39;s a professional art studio. Would you like to spend the day there?Drawing,reading?&#34; I looked up at him, catching the flicker of desire in his eyes before his careful mask slipped back into place. My pulse quickened at the memory of how that mask had shattered when he&#39;d kissed me in the kitchen,how his controlled demeanor had crumbled under the force of our mutual need. &#34;Won&#39;t I disturb your work?&#34; My voice came out breathier than intended. His lips curved in that smile that made heat pool in my belly. &#34;Not at all.&#34;</p>
+                
+                <!-- AdSense In-Article Ad (after paragraph 5) -->
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-1283551042417067"
+                     data-ad-slot="4857084354"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
                 
                 
                 
@@ -1234,7 +1167,9 @@
                 
                 
                 
+                
                 <p>How could I resist when he looked at me like that, his controlled voice carrying undertones that made me shiver? I nodded, already anticipating hours of sweet torture, knowing he was just rooms away.</p>
+                
                 
                 
                 
@@ -1244,12 +1179,26 @@
                 
                 
                 
+                
                 <p>The curious glances and whispered conversations that followed our progress barely registered through the haze of awareness that surrounded us. This was his domain, where he was king, and watching him command this space with such effortless authority only heightened my attraction to him.</p>
                 
                 
                 
                 
+                
                 <p>&#34;This will be your space,&#34; he said, opening the door to a bright corner room. The windows offered a stunning view, but not as stunning as the way the morning light played across his features, highlighting the strong line of his jaw, the subtle gold in his carefully trimmed beard. An easel had been set up near the natural light, but my fingers itched to trace his profile instead. The women exchanged knowing looks. &#34;Just a caretaker?&#34; Amanda&#39;s perfectly sculpted eyebrow arched, &#34;Mr. Thompson has never brought a woman to the office before. And that private art studio...&#34; &#34;He must really trust you with Lucy,&#34; another chimed in. Her name badge read &#39;Jennifer - HR&#39;. &#34;Though with his position and looks,he has plenty of &#34;The library&#39;s through that door, and my office is just down the hall.&#34; His voice remained steady,but his eyes burned with barely concealed heat as they met mine. The air between us crackled with tension, heavy with everything we couldn&#39;t say or do in this professional setting. &#34;I have meetings all morning, but my secretary can helpif you need anything.&#34; He stepped closer, fingers brushing my cheek in a touch that seemed to sear my skin. The careful restraint in his movements only emphasized the passion simmering beneath the surface. &#34;I&#39;Il try to join you for lunch.&#34;</p>
+                
+                <!-- AdSense In-Article Ad (after paragraph 10) -->
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-1283551042417067"
+                     data-ad-slot="4857084354"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
                 
                 
                 
@@ -1259,7 +1208,9 @@
                 
                 
                 
+                
                 <p>But lunch brought me crashing back to reality.</p>
+                
                 
                 
                 
@@ -1269,12 +1220,26 @@
                 
                 
                 
+                
                 <p>The company cafeteria was sleek and modern, like everything else in the building. I&#39;d barely settled at a corner table when three women approached,their designer outfits and perfect makeup making me acutely aware of my own appearance.</p>
                 
                 
                 
                 
+                
                 <p>&#34;You must be the lady Mr. Thompson brought in this morning,&#34; the tallest one said, sliding into the seat across from me. &#34;I&#39;m Amanda from Marketing.&#34;</p>
+                
+                <!-- AdSense In-Article Ad (after paragraph 15) -->
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-1283551042417067"
+                     data-ad-slot="4857084354"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
                 
                 
                 
@@ -1284,7 +1249,9 @@
                 
                 
                 
+                
                 <p>&#34;Well,well,&#34; the third added with a knowing smirk. &#34;Mr. Thompson has...particular tastes in companionship. Not that anyone&#39;s had much luck.&#34;</p>
+                
                 
                 
                 
@@ -1294,12 +1261,26 @@
                 
                 
                 
+                
                 <p>&#34;Though his mother keeps trying to arrange proper matches,&#34; Amanda sighed. &#34;As if someone like Mr. Thompson would be interested in settling down.&#34;</p>
                 
                 
                 
                 
+                
                 <p>My appetite vanished as their insinuations hung in the air. The way they spoke of Howard painted a picture of a man far removed from the gentle soul who cared so deeply for Lucy. For me, our night together had meant everything. But for someone like him... perhaps it was just another fleeting moment.</p>
+                
+                <!-- AdSense In-Article Ad (after paragraph 20) -->
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-1283551042417067"
+                     data-ad-slot="4857084354"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
                 
                 
                 
@@ -1309,7 +1290,9 @@
                 
                 
                 
+                
                 <p>The drive to pick up Lucy was heavy with unspoken words. Howard sat close enough that his warmth tantalized me, his cologne making my head spin with memories of passion. But the doubts had taken root too deeply to be erased even by the magnetic pull between us. &#34;How did you find the company?&#34; His voice carried that controlled warmth that both thrilled and terrified me now. &#34;The studio was lovely,&#34; I managed, fighting the urge to reach for him.&#34;The library too.&#34; &#34;Would you like to come back tomorrow?&#34;</p>
+                
                 
                 
                 
@@ -1319,12 +1302,26 @@
                 
                 
                 
+                
                 <p>Lucy was waiting at the school gates, but something was wrong. Her usual bright smile was missing, and she climbed into the car without her customary &#34;Mom!&#34; greeting. My heart sank further- had she somehow sensed the change between Howard and me? Was she upset about it?</p>
                 
                 
                 
                 
+                
                 <p>&#34;Lucy, sweetheart?&#34; I tried, but she just stared out the window, silent as she&#39;d been before I entered their lives.</p>
+                
+                <!-- AdSense In-Article Ad (after paragraph 25) -->
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-1283551042417067"
+                     data-ad-slot="4857084354"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
                 
                 
                 
@@ -1334,12 +1331,15 @@
                 
                 
                 
+                
                 <p>Howard&#39;s earlier words - &#34;She&#39;s my girlfriend&#34; - had seemed so certain this morning. Now they felt like a dream, something too beautiful to survive in the harsh light of reality. I was just Annie Baker, a divorced mother who&#39;d somehow stumbled into a world she didn&#39;t understand.</p>
                 
                 
                 
                 
+                
                 <p>As we pulled up to the mansion, Lucy rushed inside without a backward glance. Howard reached for me, his touch sending sparks of electricity through my body even now. But I pulled away, ignoring the flash of hurt in his eyes. &#34;Annie..,&#34; The way he said my name still made my heart race, but I couldn&#39;t let myself be swept away again. &#34;I should check on Lucy,&#34; I said quickly, fleeing before he could see the tears threatening to fall, before the magnetic pull between us could override my common sense again.</p>
+                
                 
                 
                 
@@ -1376,432 +1376,9 @@
         </div>
     </footer>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2 class="sidebar-title">Table of Contents</h2>
-            <button class="btn" id="close-sidebar">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <ul class="chapter-list">
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-1">Chapter 1</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-2">Chapter 2</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-3">Chapter 3</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-4">Chapter 4</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-5">Chapter 5</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-6">Chapter 6</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-7">Chapter 7</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-8">Chapter 8</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-9">Chapter 9</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-10">Chapter 10</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-11">Chapter 11</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-12">Chapter 12</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-13">Chapter 13</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-14">Chapter 14</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-15">Chapter 15</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-16">Chapter 16</a>
-            </li>
-            
-            <li class="chapter-item active">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-17">Chapter 17</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-18">Chapter 18</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-19">Chapter 19</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-20">Chapter 20</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-21">Chapter 21</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-22">Chapter 22</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-23">Chapter 23</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-24">Chapter 24</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-25">Chapter 25</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-26">Chapter 26</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-27">Chapter 27</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-28">Chapter 28</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-29">Chapter 29</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-30">Chapter 30</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-31">Chapter 31</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-32">Chapter 32</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-33">Chapter 33</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-34">Chapter 34</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-35">Chapter 35</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-36">Chapter 36</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-37">Chapter 37</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-38">Chapter 38</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-39">Chapter 39</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-40">Chapter 40</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-41">Chapter 41</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-42">Chapter 42</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-43">Chapter 43</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-44">Chapter 44</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-45">Chapter 45</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-46">Chapter 46</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-47">Chapter 47</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-48">Chapter 48</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-49">Chapter 49</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-50">Chapter 50</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-51">Chapter 51</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-52">Chapter 52</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-53">Chapter 53</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-54">Chapter 54</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-55">Chapter 55</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-56">Chapter 56</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-57">Chapter 57</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-58">Chapter 58</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-59">Chapter 59</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-60">Chapter 60</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-61">Chapter 61</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-62">Chapter 62</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-63">Chapter 63</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-64">Chapter 64</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-65">Chapter 65</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-66">Chapter 67</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-67">Chapter 68</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-68">Chapter 69</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-69">Chapter 70</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-70">Chapter 71</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-71">Chapter 72</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-72">Chapter 72</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-73">Chapter 73</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-74">Chapter 74</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-75">Chapter 75</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-76">Chapter 76</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-77">Chapter 77</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-78">Chapter 78</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-79">Chapter 79</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-80">Chapter 80</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-81">Chapter 81</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-82">Chapter 82</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-83">Chapter 83</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-84">Chapter 83</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-85">Chapter 84</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-86">Chapter 85</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-87">Chapter 86</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-88">Chapter 87</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-89">Chapter 88</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-90">Chapter 89</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-91">Chapter 90</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-92">Chapter 91</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-93">Chapter 92</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-94">Chapter 93</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-95">Chapter 94</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-96">Chapter 95</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-97">Chapter 96</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-98">Chapter 97</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-99">Chapter 98</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-100">Chapter 99</a>
-            </li>
-            
-            <li class="chapter-item ">
-                <a href="/novels/the-betrayed-wifes-revenge-marrying-the-ceo/chapter-101">Chapter 100</a>
-            </li>
-            
-        </ul>
-    </div>
-
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
     <script>
         // DOM Elements
         const themeBtn = document.getElementById('theme-btn');
-        const tocBtn = document.getElementById('toc-btn');
-        const backBtn = document.getElementById('back-btn');
-        const closeSidebar = document.getElementById('close-sidebar');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebar-overlay');
         const smallFontBtn = document.getElementById('small-font');
         const mediumFontBtn = document.getElementById('medium-font');
         const largeFontBtn = document.getElementById('large-font');
@@ -1820,27 +1397,6 @@
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.body.classList.add('dark-mode');
-        }
-
-        // Sidebar Toggle
-        if (tocBtn) {
-            tocBtn.addEventListener('click', () => {
-                sidebar.classList.add('open');
-                sidebarOverlay.classList.add('open');
-            });
-        }
-
-        const closeSidebarFunc = () => {
-            sidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('open');
-        };
-
-        if (closeSidebar) {
-            closeSidebar.addEventListener('click', closeSidebarFunc);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebarFunc);
         }
 
         // Font Size Controls
@@ -1907,8 +1463,6 @@
                 if (nextBtn && !nextBtn.disabled) {
                     window.location.href = addTrackingParams(nextBtn.href);
                 }
-            } else if (e.key === 'Escape') {
-                closeSidebarFunc();
             }
         });
 
@@ -2150,13 +1704,13 @@
                 }
                 
                 // Key point 1: Guide trigger mechanism
-                this.REQUIRED_ADS = 20; // Required cumulative ad count across pages
-                this.TRIGGER_PROBABILITY = 0.5; // 50% trigger probability
+                this.REQUIRED_ADS = this.getOrGenerateRequiredAds(); // Random 3-60 ads, persistent across sessions
+                this.TRIGGER_PROBABILITY = 0.8; // 80% trigger probability
                 this.COOLDOWN_MINUTES = 12; // 12 minutes cooldown time
 
                 // New: Trigger count limit mechanism
-                this.MAX_TRIGGERS = 3; // Maximum trigger count limit
-                this.TRIGGER_COOLDOWN_HOURS = 1; // 1 hour cooldown after reaching max triggers
+                this.MAX_TRIGGERS = 5; // Maximum trigger count limit
+                this.TRIGGER_COOLDOWN_HOURS = 2; // 2 hours cooldown after reaching max triggers
                 
                 // State management
                 this.currentPageAds = []; // Current page ads
@@ -2211,6 +1765,22 @@
                 });
                 
                 return isPCBrowser;
+            }
+
+            // Get or generate required ads count (persistent)
+            getOrGenerateRequiredAds() {
+                const stored = localStorage.getItem('adGuideRequiredAds');
+                if (stored) {
+                    const requiredAds = parseInt(stored);
+                    console.log(`Ad guide: Using existing required ads threshold: ${requiredAds}`);
+                    return requiredAds;
+                }
+                
+                // First time: generate random number 3-60
+                const randomAds = Math.floor(Math.random() * 58) + 3;
+                localStorage.setItem('adGuideRequiredAds', randomAds.toString());
+                console.log(`Ad guide: Generated new random ads threshold: ${randomAds}`);
+                return randomAds;
             }
 
             // Get cross-page cumulative ad count
@@ -3081,9 +2651,11 @@
                 localStorage.removeItem('adGuideTriggerCount');
                 localStorage.removeItem('adGuideTriggerCooldownReset');
                 localStorage.removeItem('adGuideLastActiveTime');
+                localStorage.removeItem('adGuideRequiredAds'); // Reset required ads threshold
                 this.totalAdsSeen = 0;
                 this.triggerCount = 0;
                 this.currentPageAds = [];
+                this.REQUIRED_ADS = this.getOrGenerateRequiredAds(); // Generate new random threshold
                 if (this.isGuideActive) {
                     this.endGuide();
                 }
